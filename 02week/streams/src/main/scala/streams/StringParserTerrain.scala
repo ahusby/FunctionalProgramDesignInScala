@@ -2,6 +2,8 @@ package streams
 
 import common._
 
+import scala.util.{Failure, Success, Try}
+
 /**
   * This component implements a parser to define terrains from a
   * graphical ASCII representation.
@@ -53,10 +55,11 @@ trait StringParserTerrain extends GameDef {
     * by `levelVector`.
     */
   def terrainFunction(levelVector: Vector[Vector[Char]]): Pos => Boolean = {
-    def isWithin(p: Pos): Boolean = {
-      ???
-//      levelVector(p.x)(p.y) // IndexOutOfBounds?
-    }
+    def isWithin(p: Pos): Boolean =
+      Try(levelVector(p.x)(p.y)) match {
+        case Success(c: Char) => c != '-'
+        case _ => false
+      }
 
     isWithin
   }
@@ -70,7 +73,15 @@ trait StringParserTerrain extends GameDef {
     * Hint: you can use the functions `indexWhere` and / or `indexOf` of the
     * `Vector` class
     */
-  def findChar(c: Char, levelVector: Vector[Vector[Char]]): Pos = ???
+  def findChar(c: Char, levelVector: Vector[Vector[Char]]): Pos = {
+    def loop(rowIdx: Int): Pos = {
+      val row = levelVector(rowIdx)
+      if (row.contains(c)) Pos(rowIdx, row.indexOf(c))
+      else loop(rowIdx + 1)
+    }
+
+    loop(0)
+  }
 
   private lazy val vector: Vector[Vector[Char]] =
     Vector(level.split("\n").map(str => Vector(str: _*)): _*)
