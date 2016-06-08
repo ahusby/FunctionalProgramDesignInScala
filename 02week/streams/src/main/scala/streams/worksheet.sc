@@ -1,1 +1,0 @@
-// TODO Hva gjør Vector hvis jeg bruker en for stor index?

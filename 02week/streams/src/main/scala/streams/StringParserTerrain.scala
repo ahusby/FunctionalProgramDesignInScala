@@ -1,8 +1,6 @@
 package streams
 
-import common._
-
-import scala.util.{Failure, Success, Try}
+import scala.util.{Success, Try}
 
 /**
   * This component implements a parser to define terrains from a
@@ -86,8 +84,8 @@ trait StringParserTerrain extends GameDef {
   private lazy val vector: Vector[Vector[Char]] =
     Vector(level.split("\n").map(str => Vector(str: _*)): _*)
 
-  lazy val terrain: Terrain = terrainFunction(vector)
-  lazy val startPos: Pos = findChar('S', vector)
-  lazy val goal: Pos = findChar('T', vector)
+  override lazy val terrain: Terrain = terrainFunction(vector)
+  override lazy val startPos: Pos = findChar('S', vector)
+  override lazy val goal: Pos = findChar('T', vector)
 
 }
