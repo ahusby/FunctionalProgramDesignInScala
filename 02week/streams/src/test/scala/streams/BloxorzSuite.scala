@@ -122,18 +122,18 @@ class BloxorzSuite extends FunSuite {
 
   test("paths form start") {
     new Level1 {
-      println("goal: " + goal)
+//      println("goal: " + goal)
       assert(!pathsFromStart.isEmpty, "skal være ikke-tom")
       assert(pathsFromStart.head === (startBlock, Nil), "head skal være (startBlock, Nil)")
       assert(!pathsFromStart.tail.isEmpty, "tail skal være ikke-tom")
-      println("paths form start:\n" + pathsFromStart.toList.mkString("\n"))
+//      println("paths form start:\n" + pathsFromStart.toList.mkString("\n"))
     }
   }
 
 
   test("paths to goal") {
     new Level1 {
-      println("goal: " + goal)
+//      println("goal: " + goal)
       assert(!pathsToGoal.isEmpty, ". Skal være ikke-tom")
     }
   }
